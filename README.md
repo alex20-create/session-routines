@@ -26,12 +26,14 @@ wrap-up          -> closes the session: memory, handoff, learnings, vault sync (
 
 | Path | What it is |
 |---|---|
-| `resume-project/` | The skill, its evals and a script to build eval fixtures |
+| `resume-project/` | The skill and its evals |
+| `resume-project-scripts/` | A script to build the evals' fixtures; not part of the installed skill |
 | `skill-picker/` | The skill |
 | `plan-admin/` | The skill |
-| `wrap-up/` | The skill plus the `UserPromptSubmit` hook that nudges Claude to run it when the user is closing the chat |
+| `wrap-up/` | The skill |
+| `wrap-up-hook/` | The `UserPromptSubmit` hook that nudges Claude to run `wrap-up` when the user is closing the chat; not part of the installed skill |
 
-Each skill folder has its own `SKILL.md`; the `wrap-up/hook/` folder carries a `settings.example.json` showing how to wire its hook into `~/.claude/settings.json`.
+Each skill folder holds exactly what gets installed and packaged: `SKILL.md` plus whatever it references. The two `-scripts`/`-hook` folders are tooling for one skill each, kept out of its folder so building its `.skill` package never picks them up; `wrap-up-hook/settings.example.json` shows how to wire the hook into `~/.claude/settings.json`.
 
 ## License
 
