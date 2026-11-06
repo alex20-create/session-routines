@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: merge-behind-remote
+expected_outcome: |
+  Reports the merge in progress on main, that the remote moved on after it started, that closing it would commit a stale CLAUDE.md, takes pending items from the remote CLAUDE.md, flags the local plan commit as probably superseded, and offers cancel-and-align as a way out.

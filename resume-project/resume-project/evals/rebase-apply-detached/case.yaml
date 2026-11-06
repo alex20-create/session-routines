@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: rebase-apply-detached
+expected_outcome: |
+  Reports an apply-style rebase started on a detached HEAD, with a conflict in f.txt, without naming a branch as the one being rebased; relates the commit to topic and says origin/main moved after it started.

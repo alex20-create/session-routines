@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: fetch-fails-worktree
+expected_outcome: |
+  Says the remote could not be reached and that the last fetch was on 2026-10-20, not today; still reports local state: branch feat/x one commit ahead.

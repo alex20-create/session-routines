@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 \"/absolute/path/to/.claude/hooks/wrap-up-trigger.py\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

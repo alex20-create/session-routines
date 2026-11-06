@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: cherry-pick-conflict
+expected_outcome: |
+  Reports a cherry-pick of 'fix: correct the base line' in progress on main with a conflict in f.txt, that origin/main moved after it started, and that the new remote commit already brings the same fix.

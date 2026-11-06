@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: squash-and-gone
+expected_outcome: |
+  Flags feat/sq as a leftover already in main by squash (git cherry), and feat/other as deleted on the remote without being merged, so its work exists only locally; copes with gh not applying to a non-GitHub remote.

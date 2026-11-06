@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: worktree-own-fetch-fails
+expected_outcome: |
+  Says the remote could not be reached and gives the last fetch as 2026-10-25, the worktree's own fetch, not the older shared one; reports feat/y one commit ahead.

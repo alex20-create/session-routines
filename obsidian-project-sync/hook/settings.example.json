@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/usr/bin/python3\" \"/home/you/.claude/skills/obsidian-project-sync/scripts/vault.py\" log --quiet --stdin --vault \"/home/you/Obsidian/MyVault\"",
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  }
+}
