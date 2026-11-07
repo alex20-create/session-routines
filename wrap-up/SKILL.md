@@ -1,6 +1,6 @@
 ---
 name: wrap-up
-description: Use when the user is about to archive the chat, close the session or finish for now ("voy a archivar", "cierro el chat", "wrap up", "/wrap-up"), in Claude Code or in claude.ai, even when they name none of the skills that save state. Not for the end of one task while the user keeps working, not for the daily close routine ("cierro el día", which belongs to the planning skill), and not for logging out of a website ("cerrar sesión" in that sense).
+description: Use when the user is about to archive the chat, close the session or finish for now ("voy a archivar", "cierro el chat", "wrap up", "/wrap-up"), in Claude Code or in claude.ai, even when they name none of the skills that save state, and also when the chat being closed is days old and later sessions have moved on. Not for the end of one task while the user keeps working, not for the daily close routine ("cierro el día", which belongs to the planning skill), and not for logging out of a website ("cerrar sesión" in that sense).
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Skill
 ---
 
@@ -20,14 +20,16 @@ this file says how each one runs in each environment. If the two seem to
 disagree, follow the catalogue for what and order, this file for how, and
 name the disagreement in the report so the user can fix the catalogue.
 
-## 0. Know where you are
+## 0. Know where you are, and how old the session is
 
-Most of what follows changes with the environment, so settle it first and
-say it in one line at the top of the plan. Three cases:
+Most of what follows changes with the environment and with the age of the
+session, so settle both first and say them in one line at the top of the
+plan. Three environments:
 
 - **Claude Code on the user's machine.** A shell on that machine, skills in
-  `~/.claude/skills`, hooks that run (including the `SessionEnd` hook that
-  logs each session), repositories and vault on disk. Everything below
+  `~/.claude/skills`, hooks that run (including, where one is set up, a
+  `SessionEnd` hook that logs each session; the local map or
+  `settings.json` says whether one is), repositories and vault on disk. Everything below
   applies as written.
 - **claude.ai or a cloud session with a device shell.** The chat runs in a
   Linux container, but a shell tool for the user's computer is listed, so
@@ -45,6 +47,50 @@ Signals: the platform and working directory, which tools are listed (device
 shell, device file tools, memory tools), what the system prompt says about
 memory and about a Project. If you cannot tell, say so and ask, because a
 wrong guess writes to the wrong place.
+
+Then the age. A close is usually asked for at the end of the work, but a
+chat can sit open for days and be closed later, after other sessions have
+worked on the same files, notes and skills. The session is **stale** when
+anything it touched changed after its last real work: compare the date of
+that work (the conversation's timestamps or dated notes) with the
+modification times of the files and store entries it touched, a later
+commit, a store entry dated later, or a skill it used that the listing now
+shows renamed or no longer shows. One such change is enough. The age alone
+is a reason to look, not a verdict: a week-old chat nobody built on is not
+stale. Say it in the top line with the gap ("last active on 4 Nov; files it
+touched changed since").
+
+In a stale session the disk and the stores are newer than the
+conversation, so they win:
+
+- Before planning any write, read the current version of each file and
+  store entry the step would touch, and plan against what is there now, not
+  against what the conversation remembers.
+- A decision the session took that a later session already recorded is
+  done: point at it, do not write it again. One a later session changed or
+  reversed is not this close's to restore: name it as superseded and drop
+  it. When the later record covers only part of the decision, or it is
+  unclear how much it covers, drop only the part it clearly covers and name
+  the rest as possibly superseded; which way it goes rides the single
+  question.
+- Paths, names and skills the session used may have moved or been renamed.
+  Resolve each again before using it. A new form counts only when
+  something written since states it (memory, a note, a commit, a skill's
+  own description saying what it was called before); use that form and say
+  so. When nothing states it, name the old one as no longer resolving
+  instead of guessing, and do not write it into a store as if current.
+- What is left to propose is what the session decided and nothing since
+  has recorded, changed or contradicted. That can be very little; a stale
+  close that writes one line, or nothing, is a correct close.
+
+The same chat may already hold an earlier close, run before the user kept
+working. Then this close builds on that one instead of starting over: take
+its plan and mark each step done (its report says so and the disk
+agrees), superseded, or still pending, and check only what happened after
+it. A plan the earlier close proposed that the user never answered was not
+approved: carry its pending steps into this plan, checked again against the
+disk and the rules above, instead of running them or dropping them
+silently, and say in the top line that an earlier close exists.
 
 ## 1. Discover
 
@@ -70,7 +116,8 @@ The candidate list is the `available skills` listing already in context
 (name + description). It covers local skills, plugin skills and gstack
 alike; there is no better source. Two quirks of the listing: a skill shown
 both with and without a plugin prefix, same description, is one skill, so
-call it by the bare name; and the listing can grow mid-run when a command
+call it by the bare name in the plan, but invoke it with the exact name the
+listing shows; and the listing can grow mid-run when a command
 touches a folder carrying its own skills, whose late arrivals change the
 plan only if they match a category.
 
@@ -97,11 +144,13 @@ Then check what is actually worth doing this session:
   skill's directory; any Python works). The workspace root is the session's
   working folder, or the broader folder the project instructions describe
   as holding every repository, when they do. The script lists every
-  `graphify-out/` under it and whether files changed since its manifest,
-  one line per graph: CURRENT, STALE with changed and deleted counts, or
-  UNKNOWN. The counts do not say whether the changes are notes, ~85k each
-  to re-extract, or code, which needs no LLM; say which from what the
-  session touched.
+  `graphify-out/` whose project folder sits at most three levels under it,
+  and whether files changed since its manifest: one line per graph,
+  CURRENT, STALE with changed and deleted counts, or UNKNOWN (no manifest,
+  or graphify not importable), or a single line saying none was found. The
+  counts do not say whether the changes are notes, ~85k each to
+  re-extract, or code, which needs no LLM; say which from what the session
+  touched.
   CURRENT is not a step, even if you remember editing a graphed file: the
   manifest knows whether the graph was rebuilt after that. With no Python
   on the machine, the graphs are unchecked; say so. Anywhere else the
@@ -117,6 +166,19 @@ Then check what is actually worth doing this session:
   user" line. When the session's story and git disagree (files changed in
   the session, a clean tree), name the discrepancy instead of reconciling
   it silently.
+- **Claimed writes.** List what the session said it wrote, created,
+  installed or changed (files, notes, commits, settings, installed
+  packages), and check each with a read-only look: it exists, and its
+  content is the one the session wrote (a distinctive line or the size, not
+  existence alone, since a failed overwrite leaves the old file in place).
+  A tool that reported success is not proof. When the content differs, the
+  modification time decides: changed after the session's last work means a
+  later session changed it (section 0, stale); not changed after means the
+  write never landed. A file that should exist and does not never landed
+  either, unless a later commit or note records removing it. A write that never landed, or work the session left
+  half done (installed in some places and not others, a step it promised
+  and did not run), goes in the plan's "left broken" line (section 3). A
+  session that claimed no writes skips this.
 - **Work in progress** that another skill spreads over several sessions
   (catalogue, "Work in progress"). Not a step of its own: it goes into the
   handoff note and the context save.
@@ -212,6 +274,16 @@ it, what could not be checked from here, and any mismatch between the
 session's story and the disk (section 1, Git), named rather than silently
 reconciled. Those lines are part of the plan, not an afterthought.
 
+Add one more when section 1 found any: **left broken**, one line per item,
+saying what the session promised and what the disk shows. The close does
+not fix them. A fix is work, with its own checks and questions, and folding
+it into this plan would let the single confirmation meant for saving state
+also approve changes nobody reviewed; it would also make the close depend
+on work that can fail. The handoff note and the context save carry these
+lines, so the next session meets them first, and any store write that
+mentions one words it as it stands ("not installed yet"), never as done. If
+the user wants one fixed now, that is a new task after the close.
+
 The cost matters because the steps are not equal: most cost a few thousand
 tokens, a graph update tens of thousands per changed note, and this
 skill's own rule is that the user sees a price before paying it. The
@@ -271,7 +343,7 @@ One line per step: what ran, what it wrote (path or "nothing to write"),
 or the error, and the real cost where a tool reported one (graphify
 subagents do; note it so the catalogue's or the local map's figures can be
 corrected when they drift). Then, in at most three lines, what is left for
-the user and what could not be checked. No summary paragraph. When
+the user, what was left broken and what could not be checked. No summary paragraph. When
 discovery ran without a local map, offer once to add one to the
 environment's standing instructions: a few lines naming the skill per
 category, the stores, what is retired, so the next close skips discovery.
