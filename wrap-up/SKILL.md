@@ -144,7 +144,7 @@ Then check what is actually worth doing this session:
   skill's directory; any Python works). The workspace root is the session's
   working folder, or the broader folder the project instructions describe
   as holding every repository, when they do. The script lists every
-  `graphify-out/` whose project folder sits at most three levels under it,
+  `graphify-out/` whose project folder sits at most five levels under it,
   and whether files changed since its manifest: one line per graph,
   CURRENT, STALE with changed and deleted counts, or UNKNOWN (no manifest,
   or graphify not importable), or a single line saying none was found. The
