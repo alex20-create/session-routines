@@ -2,7 +2,7 @@
 
 Usage: python find_graphs.py <root> [<root> ...]
 
-For each graphify-out/ found (at most 3 levels deep, skipping .git and
+For each graphify-out/ found (at most 5 levels deep, skipping .git and
 node_modules), compares the corpus on disk with the manifest graphify wrote
 on its last run. Prints one line per graph:
 
@@ -28,7 +28,7 @@ from pathlib import Path
 # as corpus inside a graph is graphify's own business: it honours a
 # .graphifyignore at the graph root, so put exclusions there, not here.
 SKIP_DIRS = {".git", "node_modules", ".obsidian", ".trash"}
-MAX_DEPTH = 3
+MAX_DEPTH = 5
 
 
 def find_graph_roots(root: Path) -> list[Path]:
