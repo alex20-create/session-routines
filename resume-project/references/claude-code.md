@@ -16,7 +16,7 @@ Not all work goes through a close-out skill. Cloud sessions, sessions on another
 
 ## Which project it is
 
-- If the session is inside a repository (`git rev-parse --show-toplevel`), that is the project.
+- If the session is inside a repository (`git rev-parse --show-toplevel`), that is the project. If it is not, look at the working folder's direct subfolders and at any folder added to the session: one repository there makes it the project; with several, the project's own link (the project manager's repository field or the vault note's `url:`) picks the one git is read from. Match the folder's name against the project manager and the vault as in step 1 of `SKILL.md`.
 - If the user names a project and the session is not in its folder, look for it in the vault (category C) or ask where it is.
 - If there is nothing to resume (a repository without commits, no note and no handoff), say so in one sentence and go straight to the handover (step 6 of `SKILL.md`) with whatever the user wants to do.
 
