@@ -1,6 +1,6 @@
 ---
 name: plan-admin
-description: "Work-planning routines for people who run several projects in parallel: a daily plan (today's blocks, each with its next action and a first step), a day close (where each block was left and the next actions for the next working day) and a weekly review (what went well, collisions, priorities). Reads the schedule, rules and project status from the user's project manager and project instructions, in claude.ai or in Claude Code. Use it whenever the user says 'what's on today', 'what should I do today', 'plan my day', 'where do I start today', 'I'm done for today', 'closing the day', 'weekly review', 'what have I got this week', or the equivalent in their language (in Spanish, for example, 'qué toca hoy', 'cierro el día' or 'revisión semanal'), even if the skill is not named. Do not use it to open a session on a project with history (that is a session-opening skill such as resume-project), to archive or close the chat, or to choose skills for a task."
+description: "Work-planning routines for people who run several projects in parallel: a daily plan (today's blocks, each with its next action and a first step), a day close (where each block was left and the next actions for the next working day) and a weekly review (what went well, collisions, priorities). Reads the schedule, rules and project status from the user's project manager and project instructions, in claude.ai or in Claude Code. Use it whenever the user says 'what's on today', 'what should I do today', 'plan my day', 'where do I start today', 'I'm done for today', 'closing the day', 'weekly review', 'what have I got this week', 'what's on today for my-app', or the equivalent in their language (in Spanish, for example, 'qué toca hoy', 'cierro el día' or 'revisión semanal'), even if the skill is not named. Do not use it to open a session on a project with history (that is a session-opening skill such as resume-project), to archive or close the chat, or to choose skills for a task."
 ---
 
 # Plan admin
@@ -29,9 +29,21 @@ Do not ask for anything those sources already hold. If you do not have the addre
 
 If one source contradicts another (the instructions say one thing about the schedule and the page says another), flag it and do not choose for the user.
 
-### If there is no schedule
+### Which routine
 
-In a project with no schedule or blocks (a standalone repository, say), each routine shrinks to a single block: the session's project, with its next action and its first step. Do not invent a schedule. If the user wants one, help them write it down in their project manager or instructions, with their approval.
+A phrase from the description or the instructions picks the routine. If the skill is invoked bare (its name or slash command with nothing after it), or the phrase fits more than one routine, ask in one line which of the three the user wants, offering first the one the day and time make likelier: the daily plan before the first block, the day close after the last. Do not choose from the clock alone.
+
+### Which projects
+
+The scope comes from, in this order:
+
+1. **The user's words.** A project named in the request, or "the whole day", sets it.
+2. **Where the session is.** If the working folder belongs to exactly one project, the routine covers that project only. It belongs when it is the project's repository or sits inside it, when it holds it (a project folder with its repository and side material in subfolders), or when its name, a repository link or a path matches one project in the projects database, the instructions or the notes vault, case-insensitively. In claude.ai, a Project that holds one project's work counts the same. Say in the first line that the plan covers that project only, and offer the whole day in the same line.
+3. **Otherwise, everything the schedule names.** At the root of a workspace with several projects, in a Project that organises all the work, or when the folder matches none or more than one project.
+
+With one project in scope, each routine shrinks to it: its next action and first step, and, when the schedule gives it a block, which day and which block that is (today's, or the next one). Date alerts and collisions cover that project only; anything due today or tomorrow in another project still goes in one line, because missing it costs more than the line. The day close asks only where that project was left, and checks the next action for that project's next block, whatever day it falls on. The weekly review always covers everything; from a project's folder, say so in one line before starting.
+
+With no schedule at all, the same rule applies and the scope is a single block. Do not invent a schedule. If the user wants one, help them write it down in their project manager or instructions, with their approval.
 
 ## What counts as a next action
 
@@ -50,7 +62,7 @@ Start only when the user asks for it. In any other conversation, do not give the
 1. **Day off.** If the rules say today is a day off, say so in one sentence and stop. Do not suggest work or catching up.
 2. **Today's blocks.** Take from the schedule which project goes in each block. If the instructions set a block that always comes first, put it first.
 3. **For each block**: the project, its next action (from the project manager, or a marked proposal) and a first step of a few minutes.
-4. **Date alerts.** Check key dates and dated tasks across all active projects, not just today's. Anything due today or tomorrow goes at the very top, before the blocks. Anything due in the next seven days goes in a single line at the end. Anything further out stays out, unless preparation has to start now to make it.
+4. **Date alerts.** Check key dates and dated tasks across every active project in scope (see *Which projects*), not just today's blocks. Anything due today or tomorrow goes at the very top, before the blocks. Anything due in the next seven days goes in a single line at the end. Anything further out stays out, unless preparation has to start now to make it.
 5. **Stacking commitments.** If several key dates fall in the same week within the next fourteen days, or two projects need the same resource, person or money at the same time, say so in one line and state exactly what overlaps. Do not say what should give way: that is the user's call.
 6. **Coming back after time away.** If the latest recorded activity (the last day close, the last edit to a next action, the last session) is more than three working days old according to the schedule (or more than four calendar days if there is no schedule), open with what fell due in the meantime, in one line, and give the rest as usual. No reproach for the gap. If a session-opening skill has already said this in the session, do not repeat it.
 7. **Items pending review.** If the schedule page lists items pending review whose condition has now been met (a date that has passed, a milestone reached), mention it in one line.
