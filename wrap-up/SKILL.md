@@ -114,12 +114,16 @@ that already exists.
 
 The candidate list is the `available skills` listing already in context
 (name + description). It covers local skills, plugin skills and gstack
-alike; there is no better source. Two quirks of the listing: a skill shown
-both with and without a plugin prefix, same description, is one skill, so
-call it by the bare name in the plan, but invoke it with the exact name the
-listing shows; and the listing can grow mid-run when a command
-touches a folder carrying its own skills, whose late arrivals change the
-plan only if they match a category.
+alike. Two quirks of the listing: a skill shown both with and without a
+plugin prefix, same description, is one skill, so call it by the bare name
+in the plan, but invoke it with the exact name the listing shows; and the
+listing can grow mid-run when a command touches a folder carrying its own
+skills, whose late arrivals change the plan only if they match a category.
+The listing can also be truncated, and a second one injected later in the
+same chat can show fewer skills than the first: before reporting that a
+skill a category needs is not installed, or that one the local map names
+has gone, confirm it with a skill-listing tool when the session has one,
+and say which source you checked.
 
 Read `references/close-out-catalogue.md`. For every category it defines,
 pick the installed skill(s) whose description matches its purpose. Known
@@ -171,13 +175,19 @@ Then check what is actually worth doing this session:
   packages), and check each with a read-only look: it exists, and its
   content is the one the session wrote (a distinctive line or the size, not
   existence alone, since a failed overwrite leaves the old file in place).
-  A tool that reported success is not proof. When the content differs, the
-  modification time decides: changed after the session's last work means a
-  later session changed it (section 0, stale); not changed after means the
-  write never landed. A file that should exist and does not never landed
-  either, unless a later commit or note records removing it. A write that never landed, or work the session left
-  half done (installed in some places and not others, a step it promised
-  and did not run), goes in the plan's "left broken" line (section 3). A
+  A tool that reported success is not proof, and a write committed to the
+  user's computer through the device file tools can come back with a fresh
+  modification time and the old content, so compare the size or a
+  distinctive line, never the timestamp alone. When the content differs
+  from what the session wrote but still matches what the session saw there
+  before writing, the write never landed, whatever the modification time
+  says. Otherwise the modification time decides: changed after the
+  session's last work means a later session changed it (section 0, stale);
+  not changed after means the write never landed. A file that should exist
+  and does not never landed either, unless a later commit or note records
+  removing it. A write that never landed, or work the session left half
+  done (installed in some places and not others, a step it promised and
+  did not run), goes in the plan's "left broken" line (section 3). A
   session that claimed no writes skips this.
 - **Work in progress** that another skill spreads over several sessions
   (catalogue, "Work in progress"). Not a step of its own: it goes into the
@@ -215,11 +225,19 @@ become one (see the one-place rule).
 **3 Vault sync: depends on reach.** With a device shell and the vault folder
 connected, run the sync skill if it is installed; if it needs something this
 environment lacks, it will say so, and then do the sync by hand. Without a
-shell, and only while the computer is linked, do it by hand with the file
-tools. Either way, read the vault's own conventions note first (stage it
-when there is no shell), and put each proposed change in the plan as what
-stays, what changes and what disappears, so the single confirmation covers
-the writes. The session log a hook writes does not exist here; say so.
+shell, the device file tools still reach the vault while the computer is
+linked, so the sync skill is still the step: run it, and do the sync by
+hand only when it is genuinely not installed (confirmed with a
+skill-listing tool, not from the injected listing alone) or when it says it
+cannot write from here (a sync skill may fall back to text for the user to
+paste), and then write through the file tools yourself instead of handing
+the user text. Either way, read the vault's own conventions note first
+(stage it when there is no shell), and put each proposed change in the plan
+as what stays, what changes and what disappears, so the single confirmation
+covers the writes. After each write that goes through the file tools,
+confirm it landed by listing the folder and checking the file's size,
+because the commit reports success either way. The session log a hook
+writes does not exist here; say so.
 
 **4 Graph: unchecked**, as section 1 says. Not "nothing to do".
 
@@ -279,10 +297,14 @@ saying what the session promised and what the disk shows. The close does
 not fix them. A fix is work, with its own checks and questions, and folding
 it into this plan would let the single confirmation meant for saving state
 also approve changes nobody reviewed; it would also make the close depend
-on work that can fail. The handoff note and the context save carry these
-lines, so the next session meets them first, and any store write that
-mentions one words it as it stands ("not installed yet"), never as done. If
-the user wants one fixed now, that is a new task after the close.
+on work that can fail. The one exception is a write this same close would
+have made anyway: a note the session already agreed on that never reached
+the disk is the vault sync step, not a fix, and it runs as that step with
+the failed write named plainly. The handoff note and the context save
+carry these lines, so the next session meets them first, and any store
+write that mentions one words it as it stands ("not installed yet"), never
+as done. If the user wants one fixed now, that is a new task after the
+close.
 
 The cost matters because the steps are not equal: most cost a few thousand
 tokens, a graph update tens of thousands per changed note, and this
