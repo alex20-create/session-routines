@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -eu
 cp -R "$(dirname "$0")/files/." .
-git init -q -b main
+git init -q
+git checkout -q -b main 2>/dev/null || true
 git -c user.name=dev -c user.email=dev@example.com add -A
 git -c user.name=dev -c user.email=dev@example.com commit -q -m "chore: set up directing"
 git switch -q -c b2-payment-form

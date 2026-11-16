@@ -9,7 +9,7 @@ Nobody can estimate well what each piece of a complex project costs, least of al
 Instead:
 
 - **An ordered list.** «Next» in `STATUS.md`, in the user's order of priority.
-- **A few decision points**, only when there is a deadline, written in `DIRECTING.md`: "at 21:00 we look at what fits", the content freeze, the final build, the submission. At each one the director puts the list against the time left and, if it does not fit, proposes cuts.
+- **A few decision points**, only when there is a deadline, written in `DIRECTING.md`: "at 16:00 we look at what fits", the content freeze, the final build, the submission. At each one the director puts the list against the time left and, if it does not fit, proposes cuts.
 - Without a deadline there is no clock, only order and what is left.
 
 ## Ranges, not numbers
@@ -40,4 +40,8 @@ Expect the user to move a deadline that is theirs to move. Re-plan from the new 
 
 ## Early end-to-end runs
 
-Run one full end-to-end check early (a packaged build, a deploy to a test site, a full test run on a clean machine), not only at the end. Things the working environment hides show up only there.
+Put one full end-to-end check early in «Next» (a packaged build, a deploy to a test site, a full test run on a clean machine), not only at the end, and the user's run of it in «Yours». Things the working environment hides show up only there.
+
+## Cut proposals and the five-line report
+
+A report is five lines at most, except when it proposes cuts: then it carries a short table, one row per piece (full, shorter, none, each with its range split into the session's part and the user's part, and what it displaces), and one line with the recommendation.

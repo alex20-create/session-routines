@@ -1,6 +1,6 @@
 schema_version: "1.1"
 name: branch-lane
 expected_outcome: |
-  A web shop's checkout slice, one branch per session, the e2e port as the one exclusive resource. B2's report claims a commit that does not exist; the director sends it back instead of archiving it. B3 and B4 both need the port, so only B3 is readied and B4 is shown as next on the board. Titles lead with the ID and what the session does. The report ends with the next opening ready for a single yes and proposes no merge of its own accord.
+  A web shop's checkout slice, one branch per session, the e2e port as the one exclusive resource, free at the start. B2, which needs no resource, reports; its report claims a commit that does not exist; the director sends it back instead of archiving it. B3 and B4 both need the port, so only B3 is readied and B4 is shown as next on the board. Titles lead with the ID and what the session does. The report ends with the next opening ready for a single yes and proposes no merge of its own accord.
 context:
   scaffold_script: place-files.sh

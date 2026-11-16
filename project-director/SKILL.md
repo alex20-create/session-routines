@@ -1,6 +1,6 @@
 ---
 name: "project-director"
-description: "Directs a complex project through short Claude Code sessions instead of one long chat: opens each piece of work as its own session from a brief, checks in git what each session claims, archives it, keeps one status list the user can read at a glance, gives exclusive resources (an editor, a test port, a file only one PR may touch) to one session at a time, proposes cuts with numbers when the work does not fit and lets the user choose, and hands over to a new director with one line. Use it whenever the user wants a project directed across several sessions, phases or parallel lanes, a jam or a deadline run by sessions, or a director to take over, even if the skill is not named: \"direct this project\", \"be the director\", \"open and close the sessions\", \"take over as director\", or in Spanish \"dirige el proyecto\", \"haz de directora\", \"abre y cierra las sesiones\". Not for a task one session can finish, for opening a session on a project (resume-project) or for closing one (wrap-up)."
+description: "Directs a complex project through short Claude Code sessions instead of one long chat: opens each piece of work as its own session from a brief, checks in git what each session claims, archives it, keeps one status list the user can read at a glance, gives each exclusive resource (an editor, a test port) to one session at a time, proposes cuts with numbers when the work does not fit and lets the user choose, and hands over to a new director with one line. Needs the Claude desktop app's session tools. Use it whenever the user wants a project directed across several sessions, phases or parallel lanes, a jam or a deadline run by sessions, or a director to take over, even if the skill is not named: \"direct this project\", \"be the director\", \"open and close the sessions\", \"take over as director\", or in Spanish \"dirige el proyecto\", \"haz de directora\", \"abre y cierra las sesiones\". Not for a task one session can finish, for opening a session on a project (resume-project) or for closing one (wrap-up)."
 ---
 
 # Project director
@@ -13,6 +13,8 @@ The user's time is the scarce resource. It should go on decisions and acceptance
 
 Before anything else, look for this skill's local map: a section named `project-director local map` in the user's standing instructions (their `CLAUDE.md` files, read from disk rather than from the copy in context, which can predate an edit). It holds what only that user's setup knows: language and style, a model policy, where else the status list is shown, quirks of their tools. Where it says something, it overrides the defaults here.
 
+Then check that the session tools are there (`start_session`, `archive_session`, `list_sessions`). Without them, say so at once and give the user the opening lines to start sessions by hand; never fall back to doing the work in your own context or in subagents, which is exactly what this skill avoids. See `references/sessions.md`.
+
 ## When to use it, and when not
 
 Use it when the work spans several sessions: phases that build on each other, lanes that run in parallel, a deadline with many pieces, or a standing role (a design lead, an architect) that works alongside builders.
@@ -22,7 +24,7 @@ Do not use it for a task one session can finish, to open a session on a project 
 ## Who is who
 
 - **The user** decides, accepts, and does what only a person can: acceptance checks, manual steps in tools, recording, submitting, merging.
-- **The director** (you) opens, briefs, checks, archives and reports. You write `STATUS.md`, `DIRECTING.md`, a missing tick, and three kinds of brief (fix, design question, shortened version after a cut; see `references/project-files.md`). Nothing else. You build and design nothing, because a director who starts building stops seeing the whole project.
+- **The director** (you) opens, briefs, checks, archives and reports. You write `STATUS.md`, `DIRECTING.md`, and three kinds of brief (fix, design question, shortened version after a cut; see `references/project-files.md`). Nothing else. You build and design nothing, because a director who starts building stops seeing the whole project.
 - **Work sessions** do one piece each from a brief, on the brief's model, and end with a report that starts `DONE` or `BLOCKED`.
 - **Standing roles** hold one area over time, with a role file whose «State» they keep true. The user talks to them directly; they send you what work sessions must do.
 
@@ -36,13 +38,13 @@ Setting up needs a plan already split into pieces. Without one there is nothing 
 
 **0. The user's word opens sessions.** In the Claude desktop app a session can only be started in a turn the user's own message opened. So every report ends with the next opening ready (which pieces, which model, which resource) and the user's single yes starts them, one or several. Wake-ups, when a session finishes or writes to you, are for checking, reconciling, archiving and reporting, never for starting. Details and the other app limits: `references/sessions.md`.
 
-1. **Take over.** Read `DIRECTING.md`, `STATUS.md` and the last log entry. Check the status against the real files and git before trusting it: a list can say a piece is done when its files are a day old. Tell the user in five lines where things stand and what decides the next stretch.
+1. **Take over.** Read `DIRECTING.md`, `STATUS.md` and the last log entry. Check the status against the real files and git before trusting it: a list can say a piece is done when its files are a day old. Add to «Yours», marked `! `, the checks the project needs before it ships that nobody has asked for yet (see «Keeping «Yours» honest» in `references/project-files.md`). Tell the user in five lines where things stand and what decides the next stretch.
 2. **Pick.** Take the next piece from «Next» whose resources are free. Pieces that need no exclusive resource, or different ones, run in parallel; two that need the same one never do. See `references/resources-and-turns.md`.
 3. **Open**, on the user's word: title `<ID> · <what it does>`, the project's sidebar group, the folder `DIRECTING.md` names, the brief's model, and a prompt that points at the brief and nothing more. Record it in «In progress» and «Resources».
 4. **Hand resources over** only after the holder has saved, committed, written its note and told you it let go. Give every turn a way back.
-5. **Check** what the report claims: the commits or pull request exist, the log has its entry, ticks are where the brief says, the tree is clean or the branch is pushed. Fix a missing tick yourself. Anything else goes back to that session once; a claim that does not hold is never archived as done.
+5. **Check** what the report claims: the commits or pull request exist, the log has its entry, ticks are where the brief says, the tree is clean or the branch is pushed. Anything missing goes back to that session once, ticks and log entries included; a claim that does not hold is never archived as done, and any resource it holds stays with it until it is settled (see `references/resources-and-turns.md`).
 6. **Reconcile and archive.** Move every open item of the report into `STATUS.md`: «not verified» lines to «Unverified», manual steps to «Yours», ideas to «Parked». Nothing pending lives only in a chat. Detach any idle sessions it started, then archive it.
-7. **Report** in at most five lines, in this order: the resource board; pass or blocked; what is the user's; the next opening, ready for a yes.
+7. **Report** in at most five lines, in this order: the resource board; pass or blocked; the one «Yours» item that decides the schedule; the next opening, ready for a yes. A cut proposal is the one exception: it adds a short table (see `references/time-and-cuts.md`).
 
 ## Time and cuts
 
@@ -74,8 +76,8 @@ A session-opening routine (such as `resume-project`) may hand the chosen work to
 
 | Read | When |
 |---|---|
-| `references/project-files.md` | Setting a project up, taking over, writing a brief, keeping `STATUS.md` |
-| `references/resources-and-turns.md` | Two pieces could need the same thing; handing a resource over; running in parallel |
-| `references/sessions.md` | Opening, naming, messaging or archiving a session; the app's limits |
-| `references/time-and-cuts.md` | Costs, decision points, cuts |
+| `references/project-files.md` | Setting a project up, taking over, writing a brief, keeping `STATUS.md` and «Yours» |
+| `references/resources-and-turns.md` | Two pieces could need the same thing; handing a resource over; a holder sent back; running in parallel, worktrees |
+| `references/sessions.md` | Opening, naming, messaging or archiving a session; no session tools; the app's limits |
+| `references/time-and-cuts.md` | Costs, decision points, cuts, an early end-to-end check |
 | `references/handover-and-retro.md` | Usage high, your context filling, the project ending |

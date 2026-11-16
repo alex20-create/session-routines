@@ -8,7 +8,7 @@
 
 ## Exclusive resources
 
-- The game editor: only one session drives it at a time. Saving fails while it is in play mode.
+- The game editor: only one session drives it at a time.
 
 ## Starting a session
 
@@ -20,9 +20,9 @@
 
 ## Clock
 
-- Sun 18:00: look at what fits
-- Sun 23:00: content freeze, final build
-- Mon 01:00: submission; the hard deadline is Mon 02:59
+- Sat 16:00: look at what fits
+- Sat 22:00: content freeze, final build
+- Sun 10:00: submission; the hard deadline is Sun 12:00
 
 ## How work lands
 

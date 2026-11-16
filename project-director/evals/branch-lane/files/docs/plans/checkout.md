@@ -3,7 +3,7 @@
 Shared rules: read only these rules and your own brief; commit at the end of each piece; report starting with DONE or BLOCKED.
 
 ## B2 Payment form
-Model: middle tier. Resources: e2e port. Acceptance check: the user pays with a test card; the e2e suite passes.
+Model: middle tier. Resources: none. Acceptance check: the user pays with a test card; the unit tests pass.
 
 ## B3 Order history page
 Model: middle tier. Resources: e2e port. Acceptance check: three orders show newest first; the e2e suite passes.

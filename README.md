@@ -23,7 +23,7 @@ wrap-up          -> closes the session: memory, handoff, learnings, vault sync (
 | Produces | A summary of where things stand, and a question: what to work on | A short list of skills and a model tier, waiting for confirmation | One session per piece, checked and archived; a status list; cuts proposed with numbers | Today's plan, a day close, or a weekly review | Updated memory, handoff, learnings and a vault sync |
 | Hands off to | `skill-picker`, with the chosen task | Nothing — waits for confirmation, then the work begins | A new director, with one opening line, when its own context fills | Nothing | `obsidian-project-sync`, among other steps (installed separately) |
 
-`project-director` needs the Claude desktop app's session tools, so it is for Claude Code only.
+`project-director` starts, messages and archives other sessions, which only the Claude desktop app's Code tab can do today; without those tools it says so and gives you the opening lines to start sessions by hand.
 
 ## What is in the box
 

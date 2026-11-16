@@ -23,7 +23,8 @@ One sidebar group per project. Check the existing groups first and reuse one who
 
 ## Starting a session
 
-- **The user's word opens sessions.** A session can only be started in a turn the user's own message opened. So every report ends with the next opening ready (which pieces, on which model, holding which resource), and the user's single yes starts them. The user may approve several at once; start them all in that turn. Wake-ups, when a session finishes or writes to you, are for checking, reconciling, archiving and reporting, never for starting.
+- **The user's word opens sessions.** A session can only be started in a turn the user's own message opened. So every report ends with the next opening ready (which pieces, on which model, holding which resource), and the user's single yes starts them: in the turn that yes opens, start each with `start_session` as something the user asked for (`initiation: "user_asked"`), with the working folder set. The user may approve several at once; start them all in that turn. Wake-ups, when a session finishes or writes to you, are for checking, reconciling, archiving and reporting, never for starting.
+- **No session tools at all** (a terminal without the desktop app, or the tools not loaded): say so at once, and do not fall back to building in your own context or in subagents, which is what this skill exists to avoid. Give the user each opening line to start the session by hand, and keep directing from the files.
 - Start the session in the folder where the project's tools are configured, as `DIRECTING.md` says. A session started one folder up may have none of the project's tools and not say so. Put the first tool check from `DIRECTING.md` at the start of every prompt that needs it.
 - The prompt points at the brief and nothing more: `Build brief <ID> from <briefs file> in <folder>. Read the shared rules, your own brief, and <named sections>. Nothing else.`
 - Open the next session early, read-only, when it will need a resource that is still taken (see `resources-and-turns.md`).
@@ -43,7 +44,7 @@ Where each session works on its own branch, approving a brief authorises its ses
 
 - Before archiving, move every open item of the session's report into `STATUS.md` (see `project-files.md`).
 - Archiving a session also archives the idle sessions it started. Detach those first if they should live on.
-- Never archive a session that reported `BLOCKED` and is waiting on the user.
+- Never archive a session that reported `BLOCKED` while it waits on the user. Once a fresh session takes the piece over, archive the blocked one.
 
 ## App limits
 

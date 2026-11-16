@@ -35,7 +35,7 @@ Everything else in a brief is the planner's or a design session's.
 
 ## STATUS.md
 
-Order and names are fixed (see the template): `Updated:` line, then `## Resources`, `## In progress`, `## Yours`, `## Next`, `## Blocked`, `## Unverified`, `## Done`, `## Cut`, `## Parked`.
+Order and names are fixed (see the template): `Updated: <date> <time> · <project>` line, then `## Resources`, `## In progress`, `## Yours`, `## Next`, `## Blocked`, `## Unverified`, `## Done`, `## Cut`, `## Parked`.
 
 - **Resources**: each exclusive resource, who holds it since when, who is next.
 - **In progress**: piece, session title, what it waits on.
@@ -43,10 +43,20 @@ Order and names are fixed (see the template): `Updated:` line, then `## Resource
 - **Next**: in order of priority. Only the user reorders it.
 - **Blocked**: with what it needs.
 - **Unverified**: claims nobody has checked: a session's own «not verified» lines, a build nobody ran, a sound nobody heard.
-- **Done**: recent pieces with commit or PR, start and end time, and how long the user's check took when the user says.
+- **Done**: recent pieces with commit or PR, start and end (with the date), and how long the user's check took when the user says.
 - **Cut** and **Parked**: with the date and who chose.
 
-One item per line: `- `, an optional `! `, then fields joined by ` · `. The format is fixed so other tools can read the file; do not add sections or change the separators.
+One item per line: `- `, an optional `! `, then fields joined by ` · `. The first field is the ID or short name, the second says what it is, and every later field starts with its label (`held by`, `session`, `since`, `next`, `needs`, `blocks`, `waiting on`, `cut by`, `parked`), except a commit, PR or time range in «Done». A session title always goes inside `«...»`, and a ` · ` inside `«...»` belongs to the title. The format is fixed so other tools can read the file; do not add sections, labels or separators.
+
+### Keeping «Yours» honest
+
+Things get lost when nobody owns them. When setting up or taking over, and again at each decision point, add to «Yours» the checks a project needs before it ships that nobody has asked for yet, marked `! `: a check by someone who has not seen the work, running the final build or release once before shipping it, a manual clean-up before a release, anything only a person can submit. Add each as soon as it is known, with what it blocks.
+
+At each report, repeat only the «Yours» item that decides the schedule. Do not nag the rest. If the user does not answer a status question while busy, keep the work moving and repeat that one item next time.
+
+### Ticks and log entries
+
+Ticks in the plan and entries in the log are the work session's close-out, written in its brief. When one is missing, the director does not write it: that file is not one of its two. Say it in the report and send it back to the session, or ask the user whether to add it.
 
 **The rule that keeps things from getting lost:** before archiving a session, move every open item in its report into `STATUS.md`. A «not verified» line goes to «Unverified», a manual step to «Yours», an idea to «Parked». Nothing pending lives only in a chat or in a log entry.
 
@@ -55,4 +65,4 @@ Keep it short enough to read at a glance: «Done» holds today's and yesterday's
 ## Where STATUS.md lands
 
 - In a shared checkout, commit it by path like any other file, so a session's commit never picks it up.
-- In a project where each session works on its own branch, commit it straight to the main branch by path: it is not code, and it must be readable without checking out a branch. If the main branch is protected and refuses the commit, say so to the user and ask how they want it kept.
+- In a project where each session works on its own branch, each session runs in its own worktree and the director's checkout stays on the main branch. Commit `STATUS.md` there, straight to the main branch by path: it is not code, and it must be readable without checking out a branch. Push the main branch only when `DIRECTING.md` says so. If the main branch is protected and refuses the commit, say so to the user and ask how they want it kept.

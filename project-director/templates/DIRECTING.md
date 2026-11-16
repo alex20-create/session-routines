@@ -23,7 +23,8 @@ One session at a time each. Handing over: the holder saves, leaves the tool usab
 ## Starting a session
 
 - Working folder: the repository root, where the project's tool configuration lives. A session started elsewhere may lack the project's tools and not say so.
-- First step of every work session: run `npm test -- --version`; no answer means stop and report `BLOCKED`.
+- First step of every work session: `git status` shows its own branch and a clean tree, and `npm run e2e -- --list` lists the suite; anything else means stop and report `BLOCKED`.
+- Sessions that run in parallel each get their own worktree, cut from `main`; the director's own checkout stays on `main`.
 
 ## Models
 
@@ -40,8 +41,8 @@ One session at a time each. Handing over: the holder saves, leaves the tool usab
 
 ## How work lands
 
-- One branch per session, cut from `main`; approving a brief lets its session push its branch and open its PR. Merging is the user's word every time.
-- `STATUS.md` is committed straight to `main` by path.
+- One branch per session, cut from `main`, each in its own worktree; approving a brief lets its session push its branch and open its PR. Merging is the user's word every time.
+- `STATUS.md` is committed straight to `main` by path, from the director's checkout. Pushing `main`: only when the user says (or write "after every update" here if the user chose that at setup).
 
 ## Opening line
 

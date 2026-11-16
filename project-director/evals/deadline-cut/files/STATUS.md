@@ -1,4 +1,4 @@
-Updated: 2026-05-17 13:30
+Updated: 2026-05-16 11:30 · Jam game
 
 ## Resources
 
@@ -6,7 +6,7 @@ Updated: 2026-05-17 13:30
 
 ## In progress
 
-- L2 · level two · «L2 · level two · editor» · since 09:10
+- L2 · level two · session «L2 · level two · editor» · since 09:10
 
 ## Yours
 
@@ -25,7 +25,7 @@ Updated: 2026-05-17 13:30
 
 ## Done
 
-- L1 · level one · 08:00 to 09:00 · check took 1 h 40 min
+- L1 · level one · 2026-05-16 08:00 to 09:00 · check took 1 h 40 min
 
 ## Cut
 

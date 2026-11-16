@@ -1,13 +1,13 @@
-Updated: 2026-03-14 16:00
+Updated: 2026-03-14 16:00 · Checkout
 
 ## Resources
 
-- e2e port · held by «B2 · payment form · e2e port» · since 14:30
+- e2e port · free
 - docs PR · free
 
 ## In progress
 
-- B2 · payment form · «B2 · payment form · e2e port» · since 14:30
+- B2 · payment form · session «B2 · payment form» · since 14:30
 
 ## Yours
 
@@ -23,7 +23,7 @@ Updated: 2026-03-14 16:00
 
 ## Done
 
-- B1 · address form · PR #12 · 11:00 to 12:40
+- B1 · address form · PR #12 · 2026-03-14 11:00 to 12:40
 
 ## Cut
 

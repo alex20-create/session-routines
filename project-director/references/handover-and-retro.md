@@ -7,7 +7,7 @@ Read this when the account's usage is high, when the director's own context is f
 At each report, read `get_usage`.
 
 - Near the account's 5-hour limit (above about 80%), say so in the report and ask every working session to commit at the end of its current piece. The limit stops every session at once.
-- Every piece ends in a commit anyway, so a stop loses nothing. Put "commit at the end of each piece" in the shared rules of the briefs.
+- Every piece ends in a commit anyway, so a stop loses nothing. If the briefs' shared rules do not say "commit at the end of each piece", propose adding it to the user; the template's rules carry it.
 - Near a weekly limit, tell the user once; the model policy is theirs to change.
 
 ## A new director
@@ -21,12 +21,6 @@ After about eight pieces, or when the director's own context passes about two th
 A new director's first step is to check `STATUS.md` against the real files and git before trusting it, then tell the user in five lines where things stand.
 
 The same goes for a standing role: its holder updates «State» in its role file and gives the user its opening line.
-
-## Things only the user can do
-
-They sit in «Yours» from the moment they are known, each with what it blocks. At each report repeat only the one that decides the schedule. If the user does not answer a status question while busy, keep the work moving and repeat that one next time.
-
-Watch for the ones that get lost because nobody owns them: a check by someone who has not seen the work, running the final build once before shipping it, a manual clean-up before a release. Mark them `! ` early.
 
 ## The retro
 
