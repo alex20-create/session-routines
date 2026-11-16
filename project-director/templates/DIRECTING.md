@@ -1,0 +1,48 @@
+# Directing
+
+<!--
+The standing setup for directing this project. It changes rarely; STATUS.md
+holds what changes every hour. Replace the example lines with this project's
+own and delete this comment.
+-->
+
+## Where things are
+
+- Plan and briefs: `docs/plans/checkout.md`, one `## <ID>` entry per brief
+- Status list: `STATUS.md`, written only by the director
+- Log: git history and the PR descriptions
+- Standing roles: `docs/roles/ux.md`
+
+## Exclusive resources
+
+One session at a time each. Handing over: the holder saves, leaves the tool usable, commits its own files, writes a note, and tells the director; only then does the next holder start.
+
+- e2e port: the end-to-end suite runs on a fixed port; two runs at once test the wrong build. Free means no test server is listening on it.
+- docs PR: only one pull request per batch touches `CLAUDE.md` and the README.
+
+## Starting a session
+
+- Working folder: the repository root, where the project's tool configuration lives. A session started elsewhere may lack the project's tools and not say so.
+- First step of every work session: run `npm test -- --version`; no answer means stop and report `BLOCKED`.
+
+## Models
+
+- Each brief names its model. A bug that survived two fixes goes one tier up.
+
+## Clock
+
+- No deadline: order only.
+<!-- With a deadline, list the decision points instead, e.g.
+- Fri 18:00: look at what fits; propose cuts if the list does not
+- Sun 23:00: content freeze
+- Mon 01:00: final build
+-->
+
+## How work lands
+
+- One branch per session, cut from `main`; approving a brief lets its session push its branch and open its PR. Merging is the user's word every time.
+- `STATUS.md` is committed straight to `main` by path.
+
+## Opening line
+
+For a new director: `You are the director for <project> in <folder>. Read DIRECTING.md and STATUS.md and take over.`
