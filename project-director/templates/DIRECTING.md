@@ -29,6 +29,7 @@ One session at a time each. Handing over: the holder saves, leaves the tool usab
 ## Models
 
 - Each brief names its model. A bug that survived two fixes goes one tier up.
+- Tiers to model ids: light `<model id>`, middle `<model id>`, strong `<model id>`.
 
 ## Clock
 

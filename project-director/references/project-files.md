@@ -18,10 +18,10 @@ Templates for the first four are in `../templates/`. The log is the project's ow
 
 ## Setting a project up
 
-1. Look for what the project already has before proposing anything. A plan, a briefs file, a spec folder, a dev log or a task list in the repository all count; use their names and point at them from `DIRECTING.md` instead of creating duplicates.
+1. Look for what the project already has before proposing anything. If it already describes a way of directing (a section of instructions for an earlier director), say which parts `DIRECTING.md` would replace and which it keeps, and let the user decide. A plan, a briefs file, a spec folder, a dev log or a task list in the repository all count; use their names and point at them from `DIRECTING.md` instead of creating duplicates.
 2. Check that there is a plan split into pieces. Without one there is nothing to direct: offer to open a design or planning session, and direct nothing until the plan exists.
-3. Propose `DIRECTING.md` and `STATUS.md`, filled from what you found, and show them to the user before writing. The user's yes to setting them up covers the director updating and committing these two files, and only these, for the rest of the project. Every other write still asks.
-4. Commit both by path.
+3. Propose `DIRECTING.md` and `STATUS.md`, filled from what you found, and show them to the user before writing. «Next» starts in the plan's order; the user confirms or changes it at setup, and after that only the user reorders it. Decision points come from the plan's own times; you may propose one more, and the user confirms it. With no «Done» times yet, take costs from the log and git, and say so. The user's yes to setting them up covers the director updating and committing these two files, and only these, for the rest of the project. Every other write still asks.
+4. Commit both by path. If the checkout is not on a branch (a detached HEAD), say so and ask where they should land.
 
 ## The briefs the director writes
 
@@ -40,19 +40,19 @@ Order and names are fixed (see the template): `Updated: <date> <time> · <projec
 - **Resources**: each exclusive resource, who holds it since when, who is next.
 - **In progress**: piece, session title, what it waits on.
 - **Yours**: what only the user can do (acceptance checks, manual steps in tools, recording, submitting, merging), each with what it blocks. Mark with `! ` anything at risk of being forgotten: work with no date, a check nobody asked for yet, a step that only matters at the very end.
-- **Next**: in order of priority. Only the user reorders it.
+- **Next**: in order of priority. Only the user reorders it; to add a piece (an early end-to-end check, a fix), propose where it goes. A `needs` field may name another piece (`needs B3`) or a step in «Yours»: a piece is not readied before what it needs is done.
 - **Blocked**: with what it needs.
-- **Unverified**: claims nobody has checked: a session's own «not verified» lines, a build nobody ran, a sound nobody heard.
+- **Unverified**: claims nobody has checked: a session's own «not verified» lines, a check you could not make, a build nobody ran, a sound nobody heard.
 - **Done**: recent pieces with commit or PR, start and end (with the date), and how long the user's check took when the user says.
 - **Cut** and **Parked**: with the date and who chose.
 
-One item per line: `- `, an optional `! `, then fields joined by ` · `. The first field is the ID or short name, the second says what it is, and every later field starts with its label (`held by`, `session`, `since`, `next`, `needs`, `blocks`, `waiting on`, `cut by`, `parked`), except a commit, PR or time range in «Done». A session title always goes inside `«...»`, and a ` · ` inside `«...»` belongs to the title. The format is fixed so other tools can read the file; do not add sections, labels or separators.
+One item per line: `- `, an optional `! `, then fields joined by ` · `. The first field is the ID or short name, the second says what it is, and every later field starts with its label (`held by`, `readied`, `session`, `since`, `next`, `needs`, `blocks`, `waiting on`, `status`, `cut by`, `parked`, `why`), except a commit, PR or time range in «Done». In «Resources» the second field is the state, `free` or `held by «...»`. A labelled field may end with a date (`cut by the user 2026-03-14`). A session title always goes inside `«...»`, and a ` · ` inside `«...»` belongs to the title. The format is fixed so other tools can read the file; do not add sections, labels or separators.
 
 ### Keeping «Yours» honest
 
 Things get lost when nobody owns them. When setting up or taking over, and again at each decision point, add to «Yours» the checks a project needs before it ships that nobody has asked for yet, marked `! `: a check by someone who has not seen the work, running the final build or release once before shipping it, a manual clean-up before a release, anything only a person can submit. Add each as soon as it is known, with what it blocks.
 
-At each report, repeat only the «Yours» item that decides the schedule. Do not nag the rest. If the user does not answer a status question while busy, keep the work moving and repeat that one item next time.
+At each report, repeat only the «Yours» item that decides the schedule (with no deadline, the one that blocks the most). Do not nag the rest. If the user does not answer a status question while busy, keep the work moving and repeat that one item next time.
 
 ### Ticks and log entries
 

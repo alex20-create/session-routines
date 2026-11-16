@@ -15,7 +15,7 @@ An exclusive resource is anything only one session can use at a time without bre
 
 ## The board
 
-The «Resources» section of `STATUS.md` is the board: each resource, who holds it since when, who is next. The director is the only one who writes it, and every report to the user starts with it.
+The «Resources» section of `STATUS.md` is the board: each resource, who holds it since when, who is next. A piece readied for the user's yes shows as `free · readied B3 · next B4`; once it starts, `held by «B3 · ...» · since ... · next B4`. The director is the only one who writes it, and every report to the user starts with it.
 
 While a session holds a resource, its title ends with `· <resource>`; the director renames it when the turn passes (see `sessions.md`).
 
@@ -35,7 +35,7 @@ A session that will need a resource soon can be opened early in read-only mode, 
 
 **When a holder's report is sent back**, the resource stays with it: the piece is not done, and it will need the resource again to finish. The next piece waits as next on the board. If the session cannot settle it on that one send-back, it saves, commits what it has, lets go, and the piece moves to «Blocked» with a fix brief for a fresh session; only then does the resource pass on.
 
-Every turn gets a way back, written before it starts: "if this is not right by <decision point>, revert <commit> and go on with <next piece>".
+Every turn gets a way back, written before it starts: "if this does not pass the user's check (or, under a deadline, is not right by <decision point>), revert to <commit> and go on with <next piece>".
 
 ## Things that break turns
 

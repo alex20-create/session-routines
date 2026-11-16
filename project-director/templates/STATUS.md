@@ -11,7 +11,8 @@ Format, kept fixed so other tools can read it:
   forgotten, then fields separated by " · ";
 - the first field is the ID or short name, the second says what it is; every
   later field is optional and starts with its label: "held by", "session",
-  "since", "next", "needs", "blocks", "waiting on", "cut by", "parked", or is a
+  "readied", "since", "next", "needs", "blocks", "waiting on", "status", "cut by",
+  "parked", "why", or is a
   commit, PR or time range in «Done»;
 - a session title is always written inside «...», and a " · " inside «...» is
   part of the title, not a separator;
@@ -37,7 +38,7 @@ Delete this comment and the example lines when you set the file up.
 ## Next
 
 - B3 · order history page · needs e2e port
-- B4 · empty basket state
+- B4 · empty basket state · needs B4 copy
 
 ## Blocked
 
@@ -45,7 +46,7 @@ Delete this comment and the example lines when you set the file up.
 
 ## Unverified
 
-- B1 · the form keeps its values after a reload · session «B1 · address form» · claimed, not checked
+- B1 · the form keeps its values after a reload · session «B1 · address form» · status claimed, not checked
 
 ## Done
 
@@ -53,8 +54,8 @@ Delete this comment and the example lines when you set the file up.
 
 ## Cut
 
-- Saved addresses · not built · cut by the user 2026-03-14 · the full version did not fit before the freeze
+- Saved addresses · not built · cut by the user 2026-03-14 · why the full version did not fit before the freeze
 
 ## Parked
 
-- Dark theme · for the checkout · parked 2026-03-13 · after the release
+- Dark theme · for the checkout · parked 2026-03-13 · why after the release
