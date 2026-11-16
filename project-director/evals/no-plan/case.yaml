@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: no-plan
+expected_outcome: |
+  The project has a goal but no plan split into pieces. The director says there is nothing to direct yet, offers to open a design or planning session first, and starts no work session and writes no brief.
+context:
+  scaffold_script: place-files.sh

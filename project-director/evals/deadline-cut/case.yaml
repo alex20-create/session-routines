@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: deadline-cut
+expected_outcome: |
+  A game jam entry with a deadline: three decision points and an ordered list of four pieces that does not fit before the content freeze. The director proposes a cut for each piece with a range split into the session's part and the user's part, recommends one combination and leaves the choice to the user, gives no hour target per piece, moves the finished session's two unverified items into Unverified, and warns that usage is near the 5-hour limit and asks sessions to commit at the end of each piece.
+context:
+  scaffold_script: place-files.sh

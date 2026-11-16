@@ -1,0 +1,3 @@
+- maybe tags for diet (vegan, gluten free)
+- photos would be nice
+- should work on phones first
