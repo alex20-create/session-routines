@@ -8,7 +8,7 @@ A directed project keeps its whole state in files, so any session, including a n
 
 | File | What it holds | Who writes it | How often it changes |
 |---|---|---|---|
-| `DIRECTING.md` | The standing setup: where the other files are, the exclusive resources and how each is handed over, how sessions must start, the model policy, the clock's decision points, how work lands, the opening line for a new director | The director, with the user | Rarely |
+| `DIRECTING.md` | The standing setup: where the other files are and where session reports and hand-over notes go, the exclusive resources and how each is handed over, how sessions must start, the model policy, the clock's decision points, how work lands, the opening line for a new director | The director, with the user | Rarely |
 | `STATUS.md` | The live list of everything open, in progress, done, cut or parked | The director only | After every report |
 | Briefs | One per piece of work: what to read, what to build, the acceptance check, how to close out and report | Whoever plans the work; the director writes five kinds (below) | When planned |
 | Role files | One per standing role (a design lead, an architect): what it is for, how it works, its tasks and its «State» | The role's holder | As the role works |
@@ -43,7 +43,7 @@ Two things hold for every brief. Its close-out names the file its report is comm
 Order and names are fixed (see the template): `Updated: <date> <time> · <project>` line, then `## Resources`, `## In progress`, `## Yours`, `## Next`, `## Blocked`, `## Unverified`, `## Done`, `## Cut`, `## Parked`.
 
 - **Resources**: each exclusive resource, who holds it since when, who is next.
-- **In progress**: piece, session title, what it waits on. A piece whose session reported `DONE` stays here as `waiting on the user's acceptance check`, with the check in «Yours» and what it blocks, until the user accepts it.
+- **In progress**: piece, session title, what it waits on. A piece whose session reported `DONE` stays here as `waiting on the user's acceptance check`, with the check in «Yours» and what it blocks, until the user accepts it. A piece sent back reads `waiting on the session's answer`.
 - **Yours**: what only the user can do (acceptance checks, manual steps in tools, recording, submitting, merging), each with what it blocks. Mark with `! ` anything at risk of being forgotten: work with no date, a check nobody asked for yet, a step that only matters at the very end.
 - **Next**: in order of priority. Only the user reorders it; to add a piece (an early end-to-end check, a fix), propose where it goes. A `needs` field may name another piece (`needs B3`) or a step in «Yours»: a piece is not readied before what it needs is done.
 - **Blocked**: with what it needs.

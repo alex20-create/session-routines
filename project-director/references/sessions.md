@@ -36,7 +36,7 @@ One sidebar group per project, named after the project in the user's language. C
 - A message sent to a session in the middle of a turn waits until that turn ends, which can be a long time. When it cannot wait, stop the session (`stop_session`): the queued message then runs next, and the session keeps its context.
 - Never poll a session or the board on a timer. The app wakes the director when a turn the director started in a session ends. A turn the user drives there does not wake it: that report waits for the user's next message to the director, so ask the user for one line when such a session says `DONE`.
 - Read a session's report with `list_events` at a limit of 10 or more, never by searching the disk: a small limit returns only the closing line, and a wake-up quotes only the first 400 characters.
-- A message from a session you did not start is the user's request relayed: plan it into `STATUS.md` and the right brief, answer the sender, tell the user in the next report, and start nothing on it.
+- A message from a session you did not start is the user's request relayed: list it in «Yours» with where you would put it in «Next», answer the sender, tell the user in the next report, and start nothing on it.
 - Under a deadline, expect a stream of small requests from the user in the last hour. Price each in minutes, with a way back, before it is built.
 
 ## Branches and pull requests
