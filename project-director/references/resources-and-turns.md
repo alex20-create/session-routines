@@ -11,7 +11,7 @@ An exclusive resource is anything only one session can use at a time without bre
 - a file or artifact only one session may write (a published page, a shared config, the one pull request allowed to touch the project's instructions);
 - a step that needs a tool closed (packaging, a migration) while others need it open.
 
-`DIRECTING.md` lists them with how each is handed over. Each brief says which it needs.
+`DIRECTING.md` lists them with how each is handed over. Each brief says which it needs. One that turns up after setup (a signed-in browser, a second port) is added to `DIRECTING.md` and shown to the user in the same report.
 
 ## The board
 

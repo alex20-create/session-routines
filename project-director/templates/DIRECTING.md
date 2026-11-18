@@ -11,6 +11,7 @@ own and delete this comment.
 - Plan and briefs: `docs/plans/checkout.md`, one `## <ID>` entry per brief
 - Status list: `STATUS.md`, written only by the director
 - Log: git history and the PR descriptions
+- Session reports: the PR descriptions; hand-over notes of sessions that end `BLOCKED`: `docs/notes/<ID>.md`
 - Standing roles: `docs/roles/ux.md`
 
 ## Exclusive resources
@@ -22,8 +23,12 @@ One session at a time each. Handing over: the holder saves, leaves the tool usab
 
 ## Starting a session
 
-- Working folder: the repository root, where the project's tool configuration lives. A session started elsewhere may lack the project's tools and not say so.
-- First step of every work session: `git status` shows its own branch and a clean tree, and `npm run e2e -- --list` lists the suite; anything else means stop and report `BLOCKED`.
+- Working folder: the repository root, `<absolute path>`, where the project's tool configuration lives. A session started elsewhere may lack the project's tools and not say so.
+- First step of every work session: `git status` in `<absolute path>` shows its own branch and a clean tree, and `npm run e2e -- --list` lists the suite; anything else means stop and report `BLOCKED`.
+<!-- Where pieces share one checkout, word the check as "the main branch, and
+nothing changed under your own brief's paths": a clean tree fails as soon as
+two pieces run at once. A project with no tools to check keeps the git
+line alone. -->
 - Sessions that run in parallel each get their own worktree, cut from `main`; the director's own checkout stays on `main`.
 
 ## Models
