@@ -9,7 +9,14 @@ file, not in each brief, for example:
 3. Build only what the brief lists; ideas go in the report, one line each.
 4. Done is the user's acceptance check, not yours.
 5. Commit at the end of each piece, by path, so a usage stop loses nothing.
-6. Your last message starts with the report the brief describes.
+6. Your last message starts with the report the brief describes. A turn that
+   ends before the report starts with STILL WORKING and what you wait for.
+7. A scope or product choice is the user's: ask the user, never the director.
+8. If you end BLOCKED, commit your hand-over note first: what was decided and
+   how, what you wait for, what is left.
+
+A research or document brief writes its acceptance lines so they can be
+counted, plus one line about fit that the user judges from a short summary.
 
 Delete this comment.
 -->
@@ -32,6 +39,6 @@ Delete this comment.
 2. With none, the empty state shows and its link works.
 3. The e2e suite passes on the port.
 
-**Close-out.** Commit by path, push the branch, open the PR, note what was done by hand in the PR description, tick `B3` in the plan's checklist.
+**Close-out.** Commit by path, push the branch, open the PR, note what was done by hand in the PR description, tick `B3` in the plan's checklist. The report also goes in the PR description; a hand-over note, if `BLOCKED`, in `docs/notes/B3.md`.
 
 **Report.** The first lines of the last message: `DONE` or `BLOCKED`; the acceptance check line by line as pass or fail; what was done by hand; what the user still has to do; anything not verified.
