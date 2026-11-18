@@ -27,7 +27,8 @@ One session at a time each. Handing over: the holder saves, leaves the tool usab
 - First step of every work session: `git status` in `<absolute path>` shows its own branch and a clean tree, and `npm run e2e -- --list` lists the suite; anything else means stop and report `BLOCKED`.
 <!-- Where pieces share one checkout, word the check as "the main branch, and
 nothing changed under your own brief's paths": a clean tree fails as soon as
-two pieces run at once. -->
+two pieces run at once. A project with no tools to check keeps the git
+line alone. -->
 - Sessions that run in parallel each get their own worktree, cut from `main`; the director's own checkout stays on `main`.
 
 ## Models

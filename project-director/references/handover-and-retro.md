@@ -20,7 +20,7 @@ After about eight pieces, or when the director's own context passes about two th
 
 A new director's first step is to check `STATUS.md` against the real files and git before trusting it, then tell the user in five lines where things stand.
 
-A director launched at the end of a long chain of other routines hands over as soon as the setup files exist, without waiting for the two thirds. What fills a director's context fastest is reading deliverables and plans whole: check them by structure, counts and partial reads, and read reports through the session tools.
+A director launched at the end of a long chain of other routines, with more than about a third of its context already used, hands over as soon as the setup files exist, without waiting for the two thirds. What fills a director's context fastest is reading deliverables and plans whole: check them by structure, counts and partial reads, and read reports through the session tools.
 
 The same goes for a standing role: its holder updates «State» in its role file and gives the user its opening line.
 

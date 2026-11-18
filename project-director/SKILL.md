@@ -23,8 +23,10 @@ Do not use it for a task one session can finish, to open a session on a project 
 
 Two ways of being launched need a word first:
 
-- **In the middle of other work.** Start nothing more in your own context. List what is in flight and say, for each thing, whether you finish it (only when a few steps are left), hand it to a piece with what was already found, or drop it.
-- **At the end of a long chain** (an opening routine, a planning pass, a skill selection), with more than about a third of your context already used. Set the project up, then offer the opening line for a fresh director at once instead of directing from a session that is already half full. Read each reference only when its row in the table at the end applies.
+- **In the middle of other work.** Start nothing more in your own context. List what is in flight and say, for each thing, whether you finish it (only when a few steps are left), hand it to a piece, with what was already found written into that piece's brief, or drop it.
+- **At the end of a long chain** (an opening routine, a planning pass, a skill selection), with more than about a third of your context already used. Set the project up, then offer the opening line for a fresh director at once instead of directing from a session that is already half full.
+
+However you were launched, read each reference only when its row in the table at the end applies.
 
 ## Who is who
 

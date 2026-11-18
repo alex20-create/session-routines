@@ -14,7 +14,7 @@ Write titles in the user's language, and quote them as they are, inside «...»,
 
 ## Groups
 
-One sidebar group per project, named as the `STATUS.md` header names the project. Check the existing groups first and reuse one with that name, or one the user clearly made for this project; create one only if none does. `start_session` takes no group. File your own session in the group once: the sessions you start move with it, and moving one of them alone is refused.
+One sidebar group per project, named after the project in the user's language. Check the existing groups first and reuse one with that name, or one the user clearly made for this project; create one only if none does. `start_session` takes no group. File your own session in the group once: the sessions you start move with it, and moving one of them alone is refused.
 
 ## Models
 
@@ -83,4 +83,4 @@ Observed in November 2026. The tools are often deferred: load them with the tool
 | Detach | `mcp__ccd_session_mgmt__detach_session` | Before archiving a parent whose idle side sessions should live on |
 | Archive | `mcp__ccd_session_mgmt__archive_session` | Only after the user agreed to that session; in a response of its own |
 | Usage | `mcp__ccd_session_mgmt__get_usage` | `session_id: "self"` for your own context |
-| Groups | `mcp__ccd_sidebar__list_groups`, `create_group`, `move_sessions` | File your own session; the ones you start follow |
+| Groups | `mcp__ccd_sidebar__list_groups`, `mcp__ccd_sidebar__create_group`, `mcp__ccd_sidebar__move_sessions` | File your own session; the ones you start follow |

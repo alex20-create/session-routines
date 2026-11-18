@@ -44,4 +44,4 @@ Put one full end-to-end check early in «Next» (a packaged build, a deploy to a
 
 ## Cut proposals and the five-line report
 
-A report is five lines at most, except a setup (which shows the drafts) and a cut proposal: then it carries a short table, one row per piece (full, shorter, none, each with its range split into the session's part and the user's part, and what it displaces), and one line with the recommendation.
+A report is five lines at most, except a setup (which shows the drafts), a research piece's (which adds a short summary and the question about fit) and a cut proposal: that one carries a short table, one row per piece (full, shorter, none, each with its range split into the session's part and the user's part, and what it displaces), and one line with the recommendation.
