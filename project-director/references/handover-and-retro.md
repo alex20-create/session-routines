@@ -17,10 +17,11 @@ After about eight pieces, or when the director's own context passes about two th
 1. Bring `STATUS.md` up to date and commit it.
 2. Check `DIRECTING.md` still says how things are (resources, starting rules, clock).
 3. Give the user the opening line from `DIRECTING.md`, ready to paste into a new session. Nothing else is handed over: the files are the handover.
+4. From then on, write nothing more to `STATUS.md`. If the user brings you news (a check passed, a step done), point them to the new director. Ask the user to archive your session once the new director has taken over.
 
-A new director's first step is to check `STATUS.md` against the real files and git before trusting it, then tell the user in five lines where things stand.
+A new director's first step is to rename its session to the director's title, then check `STATUS.md` against the real files and git before trusting it, then tell the user in five lines where things stand. Its first next step includes archiving the old director's session: until then, two sessions can write `STATUS.md`.
 
-A director launched at the end of a long chain of other routines, with more than about a third of its context already used, hands over as soon as the setup files exist, without waiting for the two thirds. What fills a director's context fastest is reading deliverables and plans whole: check them by structure, counts and partial reads, and read reports through the session tools.
+A director launched at the end of a long chain of other routines, with more than about a third of its context taken by that chain (not by the fixed load every session starts with), hands over as soon as the setup files exist, without waiting for the two thirds. What fills a director's context fastest is reading deliverables and plans whole: check them by structure, counts and partial reads, and read reports through the session tools.
 
 The same goes for a standing role: its holder updates «State» in its role file and gives the user its opening line.
 
