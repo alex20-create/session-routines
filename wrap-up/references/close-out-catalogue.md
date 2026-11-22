@@ -6,13 +6,17 @@ members known at the time of writing (hints only; discover the real set each
 run), and the near-misses that share a word but do something else.
 
 The known members and near-misses are the author's own install (plugins and
-gstack), kept as a worked example; the local map or discovery (`SKILL.md`,
-section 1) gives the real set. A near-miss shares a word with a category but
+gstack), kept as a worked example; the local map or discovery (below) gives
+the real set. A near-miss shares a word with a category but
 does something else: read the whole description before matching, the flagged
 ones only show the pattern. In claude.ai or a cloud session the members are
 usually absent; that is a "skip, not installed", not an error. How each
-category runs there is in `SKILL.md`, section 2; this file only says what
+category runs there is in `other-environments.md`; this file only says what
 each category is for and in what order it goes.
+
+`SKILL.md` reads this file whole in a full close and when there is no local
+map. A minimal or light close with a local map reads at most one section of
+it.
 
 The order is a dependency chain, not a preference:
 
@@ -22,6 +26,47 @@ The order is a dependency chain, not a preference:
 ```
 
 Optional categories (6, 7) go after 2 and before 3 when they apply.
+
+## Discovering without a local map
+
+With no local map, or a partial one, the installed set is discovered each
+time. The candidate list is the `available skills` listing already in
+context (name + description); it covers local skills, plugin skills and any
+other installed set alike. For every category the close's level runs, pick
+the installed skill(s) whose description matches its purpose. Known members
+are hints, not the answer: an installed skill not listed here qualifies if
+its description fits, a listed one no longer installed is skipped. Watch
+the near-misses. When the listing shows a skill by name only, match on the
+name and the "Recognise by" words, and mark it "(no description)" in the
+plan so the user knows the match is weaker. The listing can grow mid-run
+when a command touches a folder carrying its own skills; late arrivals
+change the plan only if they match a category.
+
+A category with no installed skill goes in the plan as "skip, not
+installed"; do not improvise a replacement, unless the environment has its
+own mechanism for that job (`other-environments.md`). Some categories are
+not skills (in Claude Code, auto-memory is written with the Write tool and
+a graph refresh is a command); they are steps in the same plan, only where
+the environment has them. Read the project instructions for the stores the
+user treats as the source before planning any write.
+
+A partial map (stores or retirements named, but no skill per category)
+informs discovery instead of replacing it: honour what it names, discover
+the rest, and the offer at the end becomes completing that section, not
+adding a second one.
+
+On a fresh install the plan may be one real step and six "skip, not
+installed". That is a correct close, not a failure: run what exists (in
+Claude Code, auto-memory at least), improvise nothing, and make this the
+close that offers the local map.
+
+**What a local map holds.** A short section in the environment's standing
+instructions, named after this skill: the installed skill per category,
+the stores, what is retired, which repositories have a graph and their
+rebuild commands, whether a `SessionEnd` hook logs sessions, any step of
+its own and the levels it runs at, and a cost per step or per level as
+measured there, with the date. With those, a minimal or light close needs
+nothing from this file.
 
 ## Settled decisions
 
@@ -75,7 +120,7 @@ who the user is, how they like to work, what was decided, what is in flight.
   specifies, then add its line to `MEMORY.md`. Check for an existing file
   first and update it rather than duplicating. This directory exists only in
   Claude Code; in claude.ai memory is the memory tools plus a background
-  pass, and the close only checks it (`SKILL.md`, section 2).
+  pass, and the close only checks it (`other-environments.md`).
 - `remember` (plugin `remember`): writes a first-person handoff note for the
   next session. Its hooks also capture automatically; running the skill
   explicitly makes the note deliberate.
@@ -160,6 +205,18 @@ vault has no graph to keep current.
 
 **Recognise by:** "graphify", "knowledge graph", "graph.json".
 
+**The check.** In a full close the root given to `scripts/find_graphs.py`
+is the workspace: the session's working folder, or the broader folder the
+project instructions describe as holding every repository, when they do.
+The script lists every `graphify-out/` whose project folder sits at most
+five levels under the root, and whether files changed since its manifest:
+one line per graph, CURRENT, STALE with changed and deleted counts, or
+UNKNOWN (no manifest, or graphify not importable), or a single line saying
+none was found. Only the graphs of repositories the session worked in
+become steps; name any other stale one in a line and leave it. The counts
+do not say whether the changes are notes, costly to re-extract, or code,
+which needs no LLM; say which from what the session touched.
+
 **Known members:**
 - `graphify` skill, invoked with `--update` on each directory that
   `scripts/find_graphs.py` reports as stale. Code-only changes need no
@@ -202,7 +259,7 @@ stopped) for the next session to restore.
 - Where the project instructions name one place for "where I left off" (a
   field in a project database, for one), that place is the context save,
   and a skill that owns writing there (a daily close routine) is the step.
-  See `SKILL.md`, section 2.
+  See `SKILL.md`, section 3.
 
 **Against 1b:** when both a handoff note and a context save run, "where
 the work stopped" belongs here; the handoff carries what the next session
