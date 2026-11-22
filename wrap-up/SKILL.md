@@ -98,9 +98,9 @@ offer to write a second map over one that already exists. Read only the
 map, never the whole files. In each `CLAUDE.md` that applies (the user's,
 the workspace's, the project's), search the headings for this skill's name
 with Grep, and read from the matching heading to the next heading of the
-same level. No heading matches: list that file's headings (`^#+ `) and look
-for one that reads as a map of the close routine before concluding there is
-none.
+same level. Once one file holds the map, stop looking. Only when no file
+matched, list each file's headings (`^#+ `) and look for one that reads as
+a map of the close routine before concluding there is none.
 
 **With a map,** it replaces discovery. Verify that the skills it names for
 the steps this level runs are still installed, against the skill listing
