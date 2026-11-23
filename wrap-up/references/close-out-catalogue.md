@@ -52,7 +52,7 @@ user treats as the source before planning any write.
 
 A partial map (stores or retirements named, but no skill per category)
 informs discovery instead of replacing it: honour what it names, discover
-the rest, and the offer at the end becomes completing that section, not
+the rest, and the offer at the end becomes completing that map, not
 adding a second one.
 
 On a fresh install the plan may be one real step and six "skip, not
@@ -60,13 +60,23 @@ installed". That is a correct close, not a failure: run what exists (in
 Claude Code, auto-memory at least), improvise nothing, and make this the
 close that offers the local map.
 
-**What a local map holds.** A short section in the environment's standing
-instructions, named after this skill: the installed skill per category,
-the stores, what is retired, which repositories have a graph and their
-rebuild commands, whether a `SessionEnd` hook logs sessions, any step of
-its own and the levels it runs at, and a cost per step or per level as
+**What a local map holds.** A file named after this skill, which the
+environment's standing instructions point to: the installed skill per
+category, the stores, what is retired, which repositories have a graph and
+their rebuild commands, whether a `SessionEnd` hook logs sessions, any step
+of its own and the levels it runs at, and a cost per step or per level as
 measured there, with the date. With those, a minimal or light close needs
 nothing from this file.
+
+**Where it is written.** In Claude Code, as `wrap-up.md` in the folder the
+standing instructions already name for local maps, else in one the user
+picks (`~/.claude/local-maps/` is a common choice). When no instruction
+names that folder yet, add one line to the user-level `CLAUDE.md` that does;
+one line serves every skill. The map's content never goes into a
+`CLAUDE.md`, which loads whole into every session, used or not. A map that
+is still a full section there keeps working: offer once to move it to a
+file, and leave it where it is on a no. Outside Claude Code,
+`other-environments.md` says where a map lives.
 
 ## Settled decisions
 

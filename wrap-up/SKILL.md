@@ -85,22 +85,28 @@ which changes what may be written at all.
 
 ## 2. The local map, or discovery
 
-Before discovering anything, look in the environment's standing
-instructions for a local map of this routine: a short section naming which
-installed skill covers each category, the stores, what is retired, measured
-costs, any step of its own and the levels it runs at. In Claude Code it
-lives in a `CLAUDE.md` file or in auto-memory; elsewhere,
+Before discovering anything, look for a local map of this routine: a file
+of the user's own, kept outside this skill's folder, naming which installed
+skill covers each category, the stores, what is retired, measured costs, any
+step of its own and the levels it runs at. The environment's standing
+instructions point to it. In Claude Code those are the `CLAUDE.md` files
+(the map can also sit in auto-memory); elsewhere,
 `references/other-environments.md` says where.
 
 In Claude Code read the map from disk, not from context: an injected copy
 can predate an edit, and a stale one sends you into full discovery and an
-offer to write a second map over one that already exists. Read only the
-map, never the whole files. In each `CLAUDE.md` that applies (the user's,
-the workspace's, the project's), search the headings for this skill's name
-with Grep, and read from the matching heading to the next heading of the
-same level. Once one file holds the map, stop looking. Only when no file
-matched, list each file's headings (`^#+ `) and look for one that reads as
-a map of the close routine before concluding there is none.
+offer to write a second map over one that already exists. Never read the
+`CLAUDE.md` files whole. In each one that applies (the user's, the
+workspace's, the project's), search for `local map` with Grep, ignoring
+case. A line that names the folder where local maps are kept means the map
+is `wrap-up.md` in that folder: read that file whole. A heading with this
+skill's name is the map's own section: read from it to the next heading of
+the same level, and when it points to a file, read that file whole. A
+section that holds the map itself, the older form, counts the same. Once one
+file gives the map, stop looking. A pointer that leads to no file is no
+map: say so. Only when nothing matched, list each file's headings (`^#+ `)
+and look for one that reads as a map of the close routine before concluding
+there is none.
 
 **With a map,** it replaces discovery. Verify that the skills it names for
 the steps this level runs are still installed, against the skill listing
@@ -285,5 +291,5 @@ catalogue's or the local map's figures can be corrected when they drift.
 Then, in at most three lines, what is left for the user, what was left
 broken and what could not be checked. No summary paragraph; a minimal
 close reports in one or two lines. When discovery ran without a local map,
-offer once to add one (the catalogue says what goes in it). End by saying
-the chat can be archived.
+offer once to add one (the catalogue says what goes in it and where it is
+written). End by saying the chat can be archived.

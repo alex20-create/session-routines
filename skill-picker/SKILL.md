@@ -13,13 +13,18 @@ kind of work.
 
 ## Local map first
 
-Before anything else, look for this skill's local map: a section named
-`skill-picker local map` in the user's standing instructions (their
-`CLAUDE.md` files in Claude Code, read from disk rather than from the copy
-in context, which can predate an edit; the Project instructions or the
-user's preferences in claude.ai). A section named `Local map for this
-install` inside this SKILL.md, added when the skill was packaged for one
-claude.ai account, counts too; standing instructions that say otherwise win.
+Before anything else, look for this skill's local map: a file of the user's
+own, kept outside this skill's folder, that their standing instructions
+point to. In Claude Code those are their `CLAUDE.md` files, read from disk
+rather than from the copy in context, which can predate an edit. They either
+name the folder where local maps are kept, and the map is `skill-picker.md`
+in it, or carry a section named `skill-picker local map` that points to the
+file or, in an older setup, holds the map itself. Read the file in full; if
+the pointer leads to no file, say so and go on as with no map. In claude.ai
+the map is in the Project instructions or the user's preferences. A section
+named `Local map for this install` inside this SKILL.md, added when the
+skill was packaged for one claude.ai account, counts too; standing
+instructions that say otherwise win.
 It holds what only that user's setup knows, for example:
 
 - the language and style of the reply;
@@ -31,7 +36,10 @@ It holds what only that user's setup knows, for example:
 
 Where the map says something, it overrides the defaults below. Where there is
 no map, use the defaults and do not offer to write one unless the user asks
-why a default does not suit them.
+why a default does not suit them. If they do ask, the map is written as a
+file, never as text inside a `CLAUDE.md`: in the folder their instructions
+name for local maps, or one they pick, with one line in their user-level
+`CLAUDE.md` naming that folder if none does yet.
 
 ## When to use it
 

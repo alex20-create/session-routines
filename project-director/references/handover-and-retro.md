@@ -32,7 +32,7 @@ When the project, or a big stage of it, ends:
 1. With the user, briefly: the «Done» times against the ranges given; what was lost, late or cut, and why; traps paid for.
 2. Sort each lesson:
    - about directing in general: propose it as a change to this skill;
-   - about this machine or this user's setup: their local map;
+   - about this machine or this user's setup: their local map, the file itself, not a `CLAUDE.md`;
    - about this project: the project's own instructions or memory.
 3. Ask before writing any of them.
 4. Then offer the session close-out routine if one is installed.
