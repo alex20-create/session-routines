@@ -1,6 +1,6 @@
 ---
 name: skill-picker
-description: "Before any piece of work: recommends which installed skills fit the task, in what order, and which model tier it needs, as a simple list or in phases when the task is large or the user asks, then waits for confirmation. Also use when the user asks whether a skill exists for something, wants to find or install new skills (from the skills.sh registry or GitHub), or wants to extend what Claude can do. Triggers: \"which skills should I use\", \"what model for this\", \"is there a skill for\", \"find a skill that\", \"/skill-picker\"; in Spanish \"qué skills uso\", \"qué modelo uso\", \"elige skills\", \"¿hay alguna skill para...?\", \"busca una skill\"."
+description: "Before any piece of work: recommends which installed skills fit the task, in what order, and which model tier it needs, as a simple list or in phases when the task is large or the user asks, then waits for confirmation and offers to look beyond the installed skills. Also use when the user asks whether a skill exists for something, wants to find or install new skills (from the skills.sh registry or GitHub), or wants to extend what Claude can do. Triggers: \"which skills should I use\", \"what model for this\", \"is there a skill for\", \"find a skill that\", \"/skill-picker\"; in Spanish \"qué skills uso\", \"qué modelo uso\", \"elige skills\", \"¿hay alguna skill para...?\", \"busca una skill\"."
 ---
 
 # Skill picker
@@ -32,7 +32,10 @@ It holds what only that user's setup knows, for example:
 - which routine opens a session and hands the chosen task to this skill, and
   which one closes it;
 - which installed skill vets third-party code before installing it;
-- budget rules (free options first, paid tools flagged).
+- budget rules (free options first, paid tools flagged);
+- which model families their plan offers, when not all four tiers of Part 2;
+- what to do about skills that are not installed: offer the search in every
+  proposal (the default), search without asking, or never offer.
 
 Where the map says something, it overrides the defaults below. Where there is
 no map, use the defaults and do not offer to write one unless the user asks
@@ -78,8 +81,11 @@ Choose the mode after selecting and ordering the skills (Part 1, steps 1 to
 1. The user asks for it ("in phases", "con fases", "plan mode" or similar).
 2. The main list has 5 or more skills. Alternatives named on the same line as
    another skill do not count.
-3. At least one execution skill (calendar, pieces, code, final document) comes
-   after a decision skill (strategy, approach, identity).
+3. The main list has 3 or more skills and at least one execution skill
+   (calendar, pieces, code, final document) comes after a decision skill
+   (strategy, approach, identity). With one or two skills the order already
+   says it all: a decision followed by the document that records it is a
+   simple list.
 
 If none holds, use simple mode. Do not leave the choice open: the check
 decides. The user can ask for the other mode at any time.
@@ -104,7 +110,9 @@ Common to both modes:
    for (a competitor analysis when they only want a calendar) goes to "Other
    options", not to the main list. A step the task itself implies is not
    extra work: measuring results needs goals to measure against, so a
-   goal-setting skill belongs when the user asked to measure.
+   goal-setting skill belongs when the user asked to measure. A check of the
+   result that the user did not ask for (a review, an audit) is extra work:
+   it goes to "Other options".
 5. At most 10 skills in total, unless the local map sets another cap. Include
    every relevant skill that adds something distinct, up to that cap.
    Prioritise those that change the result (method, output format, quality)
@@ -126,6 +134,9 @@ Common to both modes:
      indicators. Setting what success means is a decision and goes here, next
      to strategy.
    - Execute: calendar, pieces, code, final document.
+   - Check: going over what was just produced before anything is built on
+     it (a spec or code review, a security audit, a proofread). It goes
+     right after the skill whose output it checks, wherever that falls.
    - Review: measuring results, analysing how what was published or launched
      performs. Only this goes last.
    Before answering, walk the list top to bottom and check that no skill needs
@@ -139,7 +150,8 @@ Common to both modes:
 9. If, going through the list, you find other relevant skills you are not
    recommending, note them for the "Other options" line.
 10. If part of the task is not covered by any installed skill, note it to
-    offer a search (see "Skills that are not installed"). A part that needs
+    name it in the search offer (see "Skills that are not installed"). A part
+    that needs
     data no tool in the session can reach (analytics for a social account,
     with no connector for it) counts as not covered: say which data is
     missing, in the same line as the offer, and offer to look for a skill or
@@ -152,7 +164,7 @@ Phased mode only:
 
 11. Define the phases from what the task needs, not from the skills: do not
     create a phase because a skill exists for it. Phases usually match the
-    blocks of step 7 (gather, decide, execute, review). Merge blocks when they
+    blocks of step 7 (gather, decide, execute, check, review). Merge blocks when they
     happen together in practice; split one only when its parts need different
     model tiers. At most 5 phases.
 12. There is no cap per phase; the cap is for the total. A phase may have no
@@ -176,12 +188,30 @@ Reason by tier, not by version number, because versions change:
   reviewing something that will be reused many times (skills, plugins,
   configuration), an important script or document that will be sent or
   published, reasoning with many pieces at once.
+- Top (the Fable family): when the strong tier would not be enough. A
+  problem on which a strong-tier attempt has already failed or fallen short,
+  long work the model must carry on its own across many steps and files
+  without the user checking each one, a design with so many interacting
+  pieces that one missed link spoils the rest.
+
+The tier follows what the work is, not how closely the user wants to watch
+it. Long unattended work is a top-tier reason when the work can really run
+alone (an implementation, a migration, a wide refactor); work that stops at
+each of the user's decisions is not, however long the session.
+
+Not every plan offers every family. If the local map says which ones the
+user has, recommend only among those. When you recommend the top tier and
+cannot tell whether they have it, give the fallback in the same line ("top,
+Fable, if your plan has it; otherwise strong, Opus"). When you recommend any
+other tier, strong included, do not name the top one unless the user asked
+about it.
 
 ### Steps
 
 1. Find out which model is active if the context says. If you do not know, do
-   not guess: recommend the tier and say you cannot see which one is
-   selected. If you are running as a subagent, your own model is not
+   not guess: recommend the tier and say in one sentence that you cannot see
+   which one is selected, without a branch for each model it might be; step
+   3 is then skipped. If you are running as a subagent, your own model is not
    necessarily the user's; say so.
 2. Start from the lowest tier and move up only for a concrete reason from that
    tier's list. "It seems important" is not enough: name the item of the
@@ -199,12 +229,13 @@ Reason by tier, not by version number, because versions change:
 
 ### Special cases
 
-- If the active model belongs to a tier above the three listed here, say so
-  and do not judge it on the three-tier scale, which does not cover it. If the
-  task is clearly light or middle, you may still suggest going down.
+- If the active model belongs to a family that is not on this scale, say so
+  and do not judge it on the scale, which does not cover it. If the task is
+  clearly light or middle, you may still suggest going down.
 - You are the model that is running, and you tend to confirm that you fit.
-  Before confirming the active model, check explicitly that the tier below
-  would not do, and give that reason in the reply.
+  Before confirming the active model, or settling on a tier when you cannot
+  see the active one, check explicitly that the tier below would not do, and
+  give that reason in the reply.
 - Do not give prices or usage figures; if the user asks, point to Anthropic's
   official documentation.
 
@@ -225,10 +256,12 @@ If invoked when work has already started in the conversation:
 
 Order: skills (as a list or in phases), other options (if any), model, note on
 work already done (if any), pending questions (if any), and the closing
-question. The search offer, when it applies, goes after the model: when no
-installed skill fits it is the closing question; otherwise it joins the
-closing question, so the reply still ends with one ("Go ahead with this, and
-shall I look for a skill for X?").
+question. The search offer is part of every reply unless the local map says
+otherwise, and goes after the model: it joins the closing question, so the
+reply still ends with one ("Go ahead with this, or shall I first look for
+skills beyond the installed ones?"). When a part of the task is uncovered,
+the offer names it ("Go ahead with this, and shall I look for a skill for
+X?"). When no installed skill fits, the offer is the closing question.
 
 ### Simple mode
 
@@ -251,8 +284,10 @@ content of the work (no pillars, topics or concrete decisions yet): that comes
 later, once the user confirms.
 
 The short name is the last part of the name, without the plugin prefix
-(`brainstorming` rather than `superpowers:brainstorming`). Use the full name
-only when loading the skill. If two installed skills share a short name, add
+(`brainstorming` rather than `superpowers:brainstorming`). The plugin prefix
+is what comes before the colon: a name with no colon is already short and is
+written whole, whatever its first word (`gstack-spec`, never `spec`). Use the
+full name only when loading the skill. If two installed skills share a short name, add
 the plugin or a distinguishing trait in brackets.
 
 Skills without a description:
@@ -268,33 +303,49 @@ descriptions. If the user asks about one, explain it then. If there are none,
 leave the line out.
 
 Model: in simple mode, one line with the tier, the reason and the comparison
-with the active model. In phased mode, up to three lines after the phases: the
+with the active model, or the sentence saying you cannot see it. In phased mode, up to three lines after the phases: the
 reason for each tier, the check that the tier below would not do, the
 comparison with the active model and where to switch.
 
 Then a single question: whether to go ahead with the proposal or change
-something. Do not load any skill before the answer.
+something, with the search offer joined to it in the same sentence, not as
+a second question. Do not load any skill before the answer.
 
 If no skill adds anything clear, say so in one sentence, give the model
-recommendation and replace the closing question with the search offer.
+recommendation and close with the search offer alone.
 
 ## Skills that are not installed
 
-Never propose installing anything on your own initiative.
+The installed list is only what this setup happens to have. Something better
+suited to the task may exist outside it, and the user cannot know that
+unless the proposal says so. So every proposal carries the offer to search,
+in one line; the search itself waits for a yes. Never propose installing
+anything on your own initiative.
 
+- If the installed skills cover the whole task, the offer is general and
+  does not suggest that anything is missing: "...or shall I first look for
+  skills beyond the installed ones?".
 - If no installed skill fits the task, or an important part of it is left
-  uncovered, offer to search in one line, naming the part if there is only
-  one: "Do you want me to look for a skill for X?". Do not search or recommend
-  anything until the user says yes.
-- If the user accepts, or asks on their own whether a skill exists for
-  something ("is there a skill for...", "find a skill that...", "can Claude
-  be extended to..."), follow "Finding new skills". The decision to install is
-  always theirs.
-- If the installed skills cover the whole task, do not offer the search.
+  uncovered, the offer names the part: "Do you want me to look for a skill
+  for X?".
+- Do not search or recommend anything until the user says yes. If they
+  accept, or ask on their own whether a skill exists for something ("is
+  there a skill for...", "find a skill that...", "can Claude be extended
+  to..."), follow "Finding new skills". The decision to install is always
+  theirs.
+- The local map can change the default. "Search without asking": run
+  "Finding new skills" before replying and add its candidates to the
+  proposal under their own heading; the consent steps of that section still
+  apply. "Never offer": leave the offer out and search only when the user
+  asks.
+- Once a search has run for a task, do not offer it again for that task.
 
 ## Finding new skills
 
-You only get here if the user said they want to search. A third-party skill
+You only get here if the user said they want to search, or their local map
+says to search without asking. When the offer they accepted was the general
+one, search with words from the whole task, not from one part of it. A
+third-party skill
 can run commands on their computer, and not every user can judge a script;
 so each step that downloads, reads or installs something is explained first in
 one sentence and waits for a yes.
@@ -361,8 +412,10 @@ registry. Use this source only if GitHub is connected:
    with many installs or stars).
 2. Present at most five candidates, from either source, with: name, what it
    would do in this task, source (registry or GitHub), installs or stars if
-   any, link, and whether it ships scripts that run. Ask which to install,
-   with a "none" option.
+   any, link, and whether it ships scripts that run. When an installed skill
+   already covers the same ground, say what the candidate adds over it; if
+   nothing found beats what is installed, say so in one line instead of
+   padding the list. Ask which to install, with a "none" option.
 
 ### Before installing
 
@@ -398,8 +451,10 @@ needs restarting: say so.
 If the session comes from a scheduled task or the user said they will be back
 later, do not wait for confirmation: choose the mode and the skills, say at
 the top which ones you are using and why, add the model note so they see it
-when they come back, and carry on. Do not search for or install new skills in
-these sessions.
+when they come back, and carry on. A user who is present but wants few
+interruptions ("I don't want to babysit this") is not away: they still get
+the proposal and its closing question. Do not offer, search for or install new
+skills in these sessions, whatever the local map says about searching.
 
 ## Other start-of-session routines
 
