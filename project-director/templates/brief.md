@@ -7,7 +7,9 @@ file, not in each brief, for example:
 1. Read only these rules, your own brief and the sections it names.
 2. Start with the first check in DIRECTING.md; no answer means BLOCKED.
 3. Build only what the brief lists; ideas go in the report, one line each.
-4. Done is the user's acceptance check, not yours.
+4. Done is the user's acceptance check, not yours. When the user answers it,
+   or the fit question, in your session, record the answer in your report, in
+   their words, before you say DONE: otherwise the director asks them again.
 5. Commit at the end of each piece, by path, so a usage stop loses nothing.
 6. Your last message starts with the report the brief describes. A turn that
    ends before the report starts with STILL WORKING and what you wait for.
